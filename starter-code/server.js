@@ -1,6 +1,6 @@
 'use strict';
 
-// TODO: Install and require the NPM Postgres package 'pg' into your server.js, and ensure that it is then listed as a dependency in your package.json
+// TODO: DONE: took about 5 minutes Install and require the NPM Postgres package 'pg' into your server.js, and ensure that it is then listed as a dependency in your package.json
 const fs = require('fs');
 const express = require('express');
 const pg =  require('pg');
@@ -15,7 +15,8 @@ const app = express();
     // Your url may require that it's composed of additional information including user and password
     // const conString = 'postgres://USER:PASSWORD@HOST:PORT/DBNAME';
     // make sure you save that password as an environment variable, and read it in using process.env (like how we read process.env.PORT above). NEVER commit a password, token, or any form of credential in your code. That is what environment variables are for.
-const conString = 'postgres://localhost:5432';
+// const conString = 'postgres://localhost:5432';
+const conString = 'postgres://postgres:${process.env.password}@localhost:5432';
 
 // TODO: Our pg module has a Client constructor that accepts one argument: the conString we just defined.
 //       This is how it knows the URL and, for Windows and Linux users, our username and password for our
