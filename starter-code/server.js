@@ -40,8 +40,8 @@ app.use(express.static('./public'));
 app.get('/new', function(request, response) {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // Put your response here...
-  // From the prespective of the server the follow line only corresponds to #5 because that line only send the file thus responding.
-  // GET is the method of the article
+  // From the prespective of the server the follow line only corresponds to #5 because that line only send the file thus responding. This doesn't really correspond to any code in article.js because this query serves up the new.html page rather than updating the actual articles within that page. This doesn't use any of the CRUD functions that are used in the actual database as it is only serving up the page.
+  //
   //
   response.sendFile('new.html', {root: './public'});
 });
@@ -50,6 +50,7 @@ app.get('/new', function(request, response) {
 app.get('/articles', function(request, response) {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // Put your response here...
+  // The following line of code corresponds to #3 in the full stack diagram. It is a database client query in which it is selecting from the articles in the database. This does not correspond to an of the functions within article.js as it is simply retrieving/querying from the database. Within CRUD, it will be the READ (retrieval) function from the database.
   client.query('SELECT * FROM articles')
   .then(function(result) {
     response.send(result.rows);
@@ -62,6 +63,7 @@ app.get('/articles', function(request, response) {
 app.post('/articles', function(request, response) {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // Put your response here...
+  // The following line of code corresponds to #3 on the full stack diagram. It is posting to the database using a database query. This corresponds to the insertRecord function on line 69 of article.js. Lastly, this corresponds to the CREATE function of the CRUD functions as post is equivalent to create.
   client.query(
     `INSERT INTO
     articles(title, author, "authorUrl", category, "publishedOn", body)
@@ -87,6 +89,7 @@ app.post('/articles', function(request, response) {
 app.put('/articles/:id', function(request, response) {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // Put your response here...
+  // The following line of code corresponds to #3 on the full stack diagram as it is still querying the database for information and then updating it with the queried information. This corresponds with the updateRecord function on line 88 in article.js. Lastly, this line of code enacts the UPDATE function in CRUD.
   client.query(
     `UPDATE articles
     SET
@@ -114,6 +117,7 @@ app.put('/articles/:id', function(request, response) {
 app.delete('/articles/:id', function(request, response) {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // Put your response here...
+  // The following line of code corresponds to #3 on the full stack diagram as it again uses a query to the database and deletes the information that it supplies. This code corresponds to the deleteRecord on line 77 in article.js. Lastly, the DELETE portion of CRUD is being enacted by this line of code.
   client.query(
     `DELETE FROM articles WHERE article_id=$1;`,
     [request.params.id]
@@ -129,6 +133,7 @@ app.delete('/articles/:id', function(request, response) {
 app.delete('/articles', function(request, response) {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // Put your response here...
+  // Like the last block of code, the following line of code corresponds to #3 on the full stack diagram as it again uses a query to the database and deletes the information that it supplies. However, it deletes all of the information in the table as opposed to the ID supplied by the query. This code corresponds to the deleteRecord on line 77 in article.js. Lastly, the DELETE portion of CRUD is being enacted by this line of code.
   client.query(
     'DELETE FROM articles;'
   )
@@ -142,6 +147,7 @@ app.delete('/articles', function(request, response) {
 
 // COMMENT: What is this function invocation doing?
 // Put your response here...
+// This function checks to see if our table 'articles' exists in our database and creates a new table if it does not exist. It then proceeds to invoke loadArticles to run a check to see if our 'articles' table is populated with data. If it doesn't hold any data, then it will proceed to provide all of the table information from hackerIpsum.json
 loadDB();
 
 app.listen(PORT, function() {
@@ -154,6 +160,7 @@ app.listen(PORT, function() {
 function loadArticles() {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // Put your response here...
+  // The following line of code corresponds to #3 of the full stack diagram, as it queries the database with a SQL command to retrieve the COUNT from articles. This does not correspond with any of the functions in article.js as it is not a CRUD function and it is simply retrieving information about our data instead.
   client.query('SELECT COUNT(*) FROM articles')
   .then(result => {
     // REVIEW: result.rows is an array of objects that Postgres returns as a response to a query.
@@ -180,6 +187,7 @@ function loadArticles() {
 function loadDB() {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // Put your response here...
+  // The following line of code corresponds to item #3 on the full stack diagram as it is querying the database to retrieve information about our table. This does not correspond to any of the functions within article.js as it is simply a query that will create our tables if none exists. This enacts the CREATE function of our CRUD functions.
   client.query(`
     CREATE TABLE IF NOT EXISTS articles (
       article_id SERIAL PRIMARY KEY,
