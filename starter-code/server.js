@@ -1,26 +1,30 @@
 'use strict';
 
-// TODO: Install and require the NPM Postgres package 'pg' into your server.js, and ensure that it is then listed as a dependency in your package.json
+// DONE: Install and require the NPM Postgres package 'pg' into your server.js, and ensure that it is then listed as a dependency in your package.json
+// Estimated 2 mins and it took about 1 minute. We ran npm install
 const fs = require('fs');
 const express = require('express');
+const pg = require('pg');
 
 // REVIEW: Require in body-parser for post requests in our server. If you want to know more about what this does, read the docs!
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-// TODO: Complete the connection string for the url that will connect to your local postgres database
+// DONE: Complete the connection string for the url that will connect to your local postgres database
 // Windows and Linux users; You should have retained the user/pw from the pre-work for this course.
     // Your url may require that it's composed of additional information including user and password
     // const conString = 'postgres://USER:PASSWORD@HOST:PORT/DBNAME';
     // make sure you save that password as an environment variable, and read it in using process.env (like how we read process.env.PORT above). NEVER commit a password, token, or any form of credential in your code. That is what environment variables are for.
-const conString = 'postgres://localhost:5432';
+    //Estimated 10 minutes took about 10 minutes to figure what it was we needed to use as DB.
+const conString = 'postgres://localhost:5432/kilovolt';
 
-// TODO: Our pg module has a Client constructor that accepts one argument: the conString we just defined.
+// DONE: Our pg module has a Client constructor that accepts one argument: the conString we just defined.
 //       This is how it knows the URL and, for Windows and Linux users, our username and password for our
 //       database when client.connect is called on line 26. Thus, we need to pass our conString into our
 //       pg.Client() call.
-const client = new pg.Client('something needs to go here... read the instructions above!');
+// Estimated time alot but it was just a copy and paste.
+const client = new pg.Client(conString);
 
 // REVIEW: Use the client object to connect to our DB.
 client.connect();
@@ -36,6 +40,9 @@ app.use(express.static('./public'));
 app.get('/new', function(request, response) {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // Put your response here...
+  // From the prespective of the server the follow line only corresponds to #5 because that line only send the file thus responding.
+  // GET is the method of the article
+  //
   response.sendFile('new.html', {root: './public'});
 });
 
