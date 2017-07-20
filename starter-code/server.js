@@ -16,9 +16,9 @@ const app = express();
     // const conString = 'postgres://USER:PASSWORD@HOST:PORT/DBNAME';
     // make sure you save that password as an environment variable, and read it in using process.env (like how we read process.env.PORT above). NEVER commit a password, token, or any form of credential in your code. That is what environment variables are for.
 // mac connection string
-const conString = 'postgres://localhost:5432';
+// const conString = 'postgres://localhost:5432';
 // windows connection string
-// const conString = 'postgres://jp:1234@localhost:5432/jp';
+const conString = 'postgres://jp:1234@localhost:5432/jp';
 
 // DONE: Our pg module has a Client constructor that accepts one argument: the conString we just defined.
 //       This is how it knows the URL and, for Windows and Linux users, our username and password for our
