@@ -16,9 +16,9 @@ const app = express();
     // const conString = 'postgres://USER:PASSWORD@HOST:PORT/DBNAME';
     // make sure you save that password as an environment variable, and read it in using process.env (like how we read process.env.PORT above). NEVER commit a password, token, or any form of credential in your code. That is what environment variables are for.
 // mac connection string
-const conString = 'postgres://localhost:5432';
+// const conString = 'postgres://localhost:5432';
 // windows connection string
-// const conString = 'postgres://jp:1234@localhost:5432/jp';
+const conString = 'postgres://jp:1234@localhost:5432/jp';
 
 // DONE: Our pg module has a Client constructor that accepts one argument: the conString we just defined.
 //       This is how it knows the URL and, for Windows and Linux users, our username and password for our
@@ -65,6 +65,8 @@ app.get('/articles', function(request, response) {
 app.post('/articles', function(request, response) {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // Put your response here...
+
+  /* This correlates with the insert function found in article js and line 3 of the diagram. This is using the POST part of CRUD.*/
   client.query(
     `INSERT INTO
     articles(title, author, "authorUrl", category, "publishedOn", body)
@@ -90,6 +92,7 @@ app.post('/articles', function(request, response) {
 app.put('/articles/:id', function(request, response) {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // Put your response here...
+  /* This correlates with #3 and the update record function. This uses the PUT part of the CRUD operations. */
   client.query(
     `UPDATE articles
     SET
@@ -117,6 +120,8 @@ app.put('/articles/:id', function(request, response) {
 app.delete('/articles/:id', function(request, response) {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // Put your response here...
+/* This correlates with the delete record function in article.js and #3 in the diagram. This uses the delete part of the CRUD operation.*/
+
   client.query(
     `DELETE FROM articles WHERE article_id=$1;`,
     [request.params.id]
@@ -145,6 +150,7 @@ app.delete('/articles', function(request, response) {
 
 // COMMENT: What is this function invocation doing?
 // Put your response here...
+/*Uses regex statement to create a table if one does not exist and then loads the articles || spits out an error.*/
 loadDB();
 
 app.listen(PORT, function() {
@@ -157,6 +163,9 @@ app.listen(PORT, function() {
 function loadArticles() {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // Put your response here...
+
+  /* This correlates with the READ part of CRUD, called from loadDB function, #3 of the diagram.*/
+
   client.query('SELECT COUNT(*) FROM articles')
   .then(result => {
     // REVIEW: result.rows is an array of objects that Postgres returns as a response to a query.
@@ -183,6 +192,8 @@ function loadArticles() {
 function loadDB() {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // Put your response here...
+  /* This is a READ and if nothing then create.  It correlates with #3 of the diagram, and is implemented in server.js loadArticles function, not in article.js */
+
   client.query(`
     CREATE TABLE IF NOT EXISTS articles (
       article_id SERIAL PRIMARY KEY,
