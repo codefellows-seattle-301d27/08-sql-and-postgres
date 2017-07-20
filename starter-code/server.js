@@ -60,7 +60,7 @@ app.get('/articles', function(request, response) {
 app.post('/articles', function(request, response) {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // Put your response here...
-  // Response: number 3. This piece of code is retrieving(read) data.
+  // Response: number 3 and 4. This piece of code is create, retrieve, and returning response. This interact with Article.prototype.updateRecord(). Article.prototype.insertRecord()
   client.query(
     `INSERT INTO
     articles(title, author, "authorUrl", category, "publishedOn", body)
@@ -85,7 +85,7 @@ app.post('/articles', function(request, response) {
 
 app.put('/articles/:id', function(request, response) {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // Put your response here...
+  // Put your response here... Number 3 and 4. This piece of code is update and retrieve, and returning response. This interact with Article.prototype.updateRecord().
   client.query(
     `UPDATE articles
     SET
@@ -112,7 +112,7 @@ app.put('/articles/:id', function(request, response) {
 
 app.delete('/articles/:id', function(request, response) {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // Put your response here...
+  // Put your response here...Number 3 and 4. This piece of code is delete. and is interacting with Article.prototype.updateRecord(). Article.prototype.deleteRecord()
   client.query(
     `DELETE FROM articles WHERE article_id=$1;`,
     [request.params.id]
@@ -127,7 +127,7 @@ app.delete('/articles/:id', function(request, response) {
 
 app.delete('/articles', function(request, response) {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // Put your response here...
+  // Put your response here... Number 3 and 4. This piece of code is delete. and is interacting with Article.prototype.updateRecord(). Article.prototype.deleteRecord()
   client.query(
     'DELETE FROM articles;'
   )
