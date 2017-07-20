@@ -106,8 +106,8 @@ app.put('/articles/:id', function(request, response) {
 });
 
 app.delete('/articles/:id', function(request, response) {
-  // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // Put your response here...
+  // COMMENT: DONE What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
+  // Put your response here... app.delete - #2 & #5 client.query is #3 .then is #5 method: Article.prototype.deleteRecord The D in CRUD
   client.query(
     `DELETE FROM articles WHERE article_id=$1;`,
     [request.params.id]
@@ -121,8 +121,8 @@ app.delete('/articles/:id', function(request, response) {
 });
 
 app.delete('/articles', function(request, response) {
-  // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // Put your response here...
+  // COMMENT: DONE What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
+  // Put your response here... app.delete - #2 & #5 client.query is #3 .then is #5 method: Article.truncateTable The D in CRUD
   client.query(
     'DELETE FROM articles;'
   )
@@ -134,8 +134,8 @@ app.delete('/articles', function(request, response) {
   });
 });
 
-// COMMENT: What is this function invocation doing?
-// Put your response here...
+// COMMENT: DONE What is this function invocation doing?
+// Put your response here... Is creating the table and loading the information
 loadDB();
 
 app.listen(PORT, function() {
@@ -146,8 +146,8 @@ app.listen(PORT, function() {
 //////// ** DATABASE LOADER ** ////////
 ////////////////////////////////////////
 function loadArticles() {
-  // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // Put your response here...
+  // COMMENT DONE: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
+  // Put your response here... client.query has #3 and #4 Method: Article.fetchAll() the C and R in CRUD
   client.query('SELECT COUNT(*) FROM articles')
   .then(result => {
     // REVIEW: result.rows is an array of objects that Postgres returns as a response to a query.
@@ -172,8 +172,8 @@ function loadArticles() {
 }
 
 function loadDB() {
-  // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // Put your response here...
+  // COMMENT:  DONE What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
+  // Put your response here... client.query is #3 and a #1 in the diagram Method:Article.loadAll() and C and R in CRUD
   client.query(`
     CREATE TABLE IF NOT EXISTS articles (
       article_id SERIAL PRIMARY KEY,
