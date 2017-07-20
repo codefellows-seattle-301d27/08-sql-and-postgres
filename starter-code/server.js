@@ -39,8 +39,7 @@ app.use(express.static('./public'));
 app.get('/new', function(request, response) {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // Put your response here...
-
-
+ // Response: number 5. This piece of code is retrieving(reading) data.
   response.sendFile('new.html', {root: './public'});
 });
 
@@ -48,6 +47,7 @@ app.get('/new', function(request, response) {
 app.get('/articles', function(request, response) {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // Put your response here...
+  // Response: number 3 and 4. This piece of code is retrieving(read) data.
   client.query('SELECT * FROM articles')
   .then(function(result) {
     response.send(result.rows);
@@ -60,6 +60,7 @@ app.get('/articles', function(request, response) {
 app.post('/articles', function(request, response) {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // Put your response here...
+  // Response: number 3. This piece of code is retrieving(read) data.
   client.query(
     `INSERT INTO
     articles(title, author, "authorUrl", category, "publishedOn", body)
