@@ -18,7 +18,7 @@ const app = express();
 // mac connection string
 // const conString = 'postgres://localhost:5432';
 // windows connection string
-const conString = 'postgres://jp:1234@localhost:5432/jp';
+const conString = process.env.PG_PASSWORD;
 
 // DONE: Our pg module has a Client constructor that accepts one argument: the conString we just defined.
 //       This is how it knows the URL and, for Windows and Linux users, our username and password for our
